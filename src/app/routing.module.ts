@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
-import { NavComponent } from '../navbar/nav/nav.component';
-import { AppComponent } from '../app.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
 
 
 const appRoutes: Routes = [
@@ -13,7 +12,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(appRoutes),
   ]
 })
 export class RoutingModule { }

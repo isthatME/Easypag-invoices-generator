@@ -1,0 +1,5 @@
+{
+    "/api/*":{
+        "target": "https://sandbox.easypag.com.br/api/v1/customers"
+    }
+}
