@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { FormComponent } from './views/form/form.component'
+import { BillListComponent } from './views/bill-list/bill-list.component'
 
 
 const appRoutes: Routes = [
-  { path: '/', component: AppComponent }
+  { path: '', component: BillListComponent },
+  { path: 'form', component: FormComponent },
+  { path: 'bill', component: BillListComponent }
 ];
 
-
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(appRoutes),
-  ]
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
 })
-export class RoutingModule { }
+export class AppRoutingModule { }

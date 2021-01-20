@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.customer.name}} </td>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Valor </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Emissão </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt | date:"dd/MM/yyyy"}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef> Vencimento </th>
+            <td mat-cell *matCellDef="let element"> {{element.dueDate | date:"dd/MM/yyyy"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element">
+               <button mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[1,5,10,25]" [pageSize]="5"></mat-paginator>
+    </div>
+  

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BillServiceService } from 'src/app/share/bill-service.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +7,10 @@ import { BillServiceService } from 'src/app/share/bill-service.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private billService: BillServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.billService.getAllCustomers().subscribe(data => {
-      console.log(data)
-    })
+
   }
 
 }

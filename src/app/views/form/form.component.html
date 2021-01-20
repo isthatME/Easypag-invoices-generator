@@ -1,1 +1,60 @@
-<p>form works!</p>
+<app-navbar></app-navbar>
+<form [formGroup]="form" class="normal-form">
+
+    <div class="form-container">
+        <div class="main-data">
+            <div formGroupName="customer">
+                <mat-form-field>
+                    <input formControlName="name" matInput placeholder="Digite seu nome">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="docNumber" matInput placeholder="Digite seu cpf">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="email" matInput placeholder="Digite seu email">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="phoneNumber" matInput placeholder="Digite o telefone">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="maturityDate" matInput placeholder="Escolha uma data">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="adress">
+            <div formGroupName="adress">
+                <mat-form-field>
+                    <input formControlName="cep" matInput placeholder="Digite o CEP">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="city" matInput placeholder="Digite a cidade">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="uf" matInput placeholder="Digite o uf">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="streetNumber" matInput placeholder="Digite o número">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="addressLine1" matInput placeholder="Digite seu logradouro">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="complement" matInput placeholder="Digite so complemento">
+                </mat-form-field>
+            </div>
+        </div>
+        <div formGroupName="items">
+            <mat-form-field>
+                <input formControlName="description" matInput placeholder="Digite seu nome">
+            </mat-form-field>
+            <mat-form-field>
+                <input formControlName="quantity" matInput placeholder="Digite seu nome">
+            </mat-form-field>
+            <mat-form-field>
+                <input formControlName="price" matInput placeholder="Digite seu nome">
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit(form)">Submit</button>
+
+</form>
