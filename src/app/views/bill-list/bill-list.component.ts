@@ -2,12 +2,9 @@ import { BillService } from 'src/app/shared/bill-service.service';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from '../form/form.component';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { Router } from '@angular/router';
-import { CancelErrorComponent } from 'src/app/notifications/cancel-error/cancel-error.component';
 
 @Component({
   selector: 'app-bill-list',
@@ -25,7 +22,11 @@ export class BillListComponent implements AfterViewInit {
     private billService: BillService,
     private dialogService: DialogService,
     private router: Router
-  ) { }
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+  }
   ngAfterViewInit(): void {
     this.onLoad()
   }
@@ -42,11 +43,11 @@ export class BillListComponent implements AfterViewInit {
 
   onCancel(elem) {
     this.dialogService.openConfirmDialog("Tem certeza que deseja cancelar essa cobrança?")
-      .afterClosed().subscribe((res: any) => {
-        if (res) {
-          this.billService.cancelBill(elem.id).subscribe((data: Object) => {
-            console.log('succes', data)
-            this.router.navigate(['/bill'])
+    .afterClosed().subscribe((res: any) => {
+      if (res) {
+        this.billService.cancelBill(elem.id).subscribe((data: Object) => {
+          console.log('succes', data)
+          this.router.navigateByUrl('/bill')
           }, error => this.dialogService.errorOnCancelDialog('Não é possível cancelar essa cobrança'))
         }
       })

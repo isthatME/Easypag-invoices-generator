@@ -25,6 +25,14 @@ export class DialogService {
       }
     })
   }
+  errorOnSubmitForm(msg: string){
+    return this.dialog.open(ConfirmComponent, {
+       position: { top: '10px'},
+       data: {
+         message: msg
+       }
+     })
+   }
   errorOnCancelDialog(msg: string){
     return this.dialog.open(CancelErrorComponent, {
       position: { top: '10px'},
