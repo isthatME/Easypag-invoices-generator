@@ -1,26 +1,26 @@
-// export class bill {
-//     dueDate: Date;
-//     items: [
-//       {
-//         description: string,
-//         quantity: number,
-//         price: number
-//       }
-//     ];
-//     customer: {
-//       "name": "PESSOA JURÍDICA LTDA",
-//       "email": "pessoajuridica@email.com",
-//       "phoneNumber": "5599999999999",
-//       "docNumber": "76336239000107",
-//       "address": {
-//         "cep": "03307020",
-//         "uf": "SP",
-//         "city": "São Paulo",
-//         "area": "Tatuapé",
-//         "addressLine1": "Rua Lourenço Correa",
-//         "streetNumber": "470"
-//       }
-//     };
-//     "instructionsMsg": "Teste de Instrução",
-//     "notes": "Teste de Observação"
-//   }
+export class Bill {
+    dueDate: string;
+    items: [
+      {
+        description: string;
+        quantity: number;
+        price: number;
+      }
+    ];
+    customer: {
+      name: string;
+      email:string;
+      phoneNumber:string;
+      docNumber:string;
+      address: {
+        cep: string;
+        uf: string;
+        city: string;
+        area: string;
+        addressLine1: string;
+        streetNumber: string;
+      }
+    };
+    instructionsMsg: string;
+    notes: string;
+  }

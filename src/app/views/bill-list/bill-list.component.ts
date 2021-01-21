@@ -5,47 +5,53 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from '../form/form.component';
+import { DialogService } from 'src/app/shared/dialog.service';
+import { Router } from '@angular/router';
+import { CancelErrorComponent } from 'src/app/notifications/cancel-error/cancel-error.component';
 
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list.component.html',
   styleUrls: ['./bill-list.component.css']
 })
-export class BillListComponent implements AfterViewInit  {
+export class BillListComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['status','name', 'price', 'createdAt','dueDate','actions'];
-  
+  displayedColumns: string[] = ['status', 'name', 'price', 'createdAt', 'dueDate', 'actions'];
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private billService: BillService,
-    private dialog: MatDialog
-    ) { }
-  ngAfterViewInit(): void {       
+    private dialogService: DialogService,
+    private router: Router
+  ) { }
+  ngAfterViewInit(): void {
     this.onLoad()
   }
 
-  onLoad(){
-    this.billService.listBills().subscribe((data:any) => {
+  onLoad() {
+    this.billService.listBills().subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data.results)
-      this.dataSource.sort = this.sort
       this.dataSource.paginator = this.paginator
     })
   }
-  onView(billId){
-    window.open(`https://sandbox.easypag.com.br/api/v1/invoices/${billId.id}/view/boleto`, "_blank");
+  onView(billId) {
+    this.billService.viewBill(billId.id);
   }
 
-  onCancel(elem){
-    this.billService.cancelBill(elem.id).subscribe((data: Object) => {
-      console.log('succes', data)
-      this.onLoad()
-    })
-    this.onLoad()
+  onCancel(elem) {
+    this.dialogService.openConfirmDialog("Tem certeza que deseja cancelar essa cobrança?")
+      .afterClosed().subscribe((res: any) => {
+        if (res) {
+          this.billService.cancelBill(elem.id).subscribe((data: Object) => {
+            console.log('succes', data)
+            this.router.navigate(['/bill'])
+          }, error => this.dialogService.errorOnCancelDialog('Não é possível cancelar essa cobrança'))
+        }
+      })
   }
-  onCreate(){
-    this.dialog.open(FormComponent);
+  onCreate() {
+    this.dialogService.open(FormComponent);
   }
 }

@@ -1,7 +1,10 @@
+import { Bill } from './../../models/billModel';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BillService } from 'src/app/shared/bill-service.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FormErrorComponent } from 'src/app/notifications/form-error/form-error.component';
 
 @Component({
   selector: 'app-form',
@@ -12,14 +15,16 @@ export class FormComponent implements OnInit {
   
   form: FormGroup;
   selected = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private billService: BillService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private dialog: MatDialog
+    ) { }    
+    
+    ngOnInit(): void {         
 
-
-  ngOnInit(): void {
     this.form = this.formBuilder.group({
       customer: this.formBuilder.group({
         name: [null, Validators.required],
@@ -29,7 +34,7 @@ export class FormComponent implements OnInit {
         address: this.formBuilder.group({
           cep: [null, Validators.required],
           city: [null, Validators.required],
-          // uf: [null, Validators.required],
+          uf: [null, Validators.required],
           streetNumber: [null, Validators.required],
           area: [null, Validators.required],
           addressLine1: [null, Validators.required],
@@ -48,33 +53,23 @@ export class FormComponent implements OnInit {
     });
   }
   onSubmit() {
-    const formObj = {
-      customer: {
-        name : this.form.value.customer.docNumber,
-        docNumber : this.form.value.customer.docNumber,
-        email : this.form.value.customer.email,
-        phoneNumber : this.form.value.customer.phoneNumber,
-        address : {
-          cep : this.form.value.customer.address.cep,
-          city : this.form.value.customer.address.city,
-          uf : this.selected,
-          streetNumber : this.form.value.customer.address.streetNumber,
-          area : this.form.value.customer.address.area,
-          addressLine1 : this.form.value.customer.address.addressLine1,
-        } 
-      },
-      instructionsMsg : this.form.value.instructionsMsg,
-      notes : this.form.value.notes,
-      dueDate : this.form.value.dueDate,
-      items : [{
-        description : this.form.value.items[0].description,
-        quantity : parseInt(this.form.value.items[0].quantity),
-        price :  parseInt(this.form.value.items[0].price),
-      }]
-    }
-    this.billService.chargeCustomer(formObj).subscribe((data: Object) => {
+    //copy the current form so it's continue imutable
+    const formObj: Bill = Object.assign(this.form.value)
+
+    // set the quantity and price property as number to fit in the bill model
+    formObj.items[0].quantity = Number(this.form.value.items[0].quantity)
+    formObj.items[0].price = Number(this.form.value.items[0].price)
+
+    
+    this.billService.chargeCustomer(formObj).subscribe((data: Bill) => {
       console.log('succes', data)
       this.router.navigate(['/bill'])
-    })
+    },
+     error =>  {
+       const dialogConfig = new MatDialogConfig();
+       dialogConfig.height = '10rem'
+       this.dialog.open(FormErrorComponent)
+      }
+)
   }
 }
