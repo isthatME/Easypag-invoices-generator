@@ -29,3 +29,13 @@ table {
 .timer-icon{
   color: #f39c12;
 }
+/* spinner */
+.table-spinner-container {
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+}
+.table-container ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke:  #5b3f9c;
+}

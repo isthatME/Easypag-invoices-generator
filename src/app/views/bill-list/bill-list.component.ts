@@ -15,6 +15,7 @@ export class BillListComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['status', 'name', 'price', 'createdAt', 'dueDate', 'actions'];
+  isLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -35,6 +36,7 @@ export class BillListComponent implements AfterViewInit {
     this.billService.listBills().subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data.results)
       this.dataSource.paginator = this.paginator
+      this.isLoading = false;
     })
   }
   onView(billId) {
@@ -42,15 +44,15 @@ export class BillListComponent implements AfterViewInit {
   }
 
   onCancel(elem) {
-    this.dialogService.openConfirmDialog("Tem certeza que deseja cancelar essa cobrança?")
-    .afterClosed().subscribe((res: any) => {
-      if (res) {
-        this.billService.cancelBill(elem.id).subscribe((data: Object) => {
-          console.log('succes', data)
-          this.router.navigateByUrl('/bill')
-          }, error => this.dialogService.errorOnCancelDialog('Não é possível cancelar essa cobrança'))
-        }
-      })
+    this.router.navigateByUrl('/bill')
+      // this.dialogService.openConfirmDialog("Tem certeza que deseja cancelar essa cobrança?")
+      // .afterClosed().subscribe((res: any) => {
+      //   if (res) {
+      //     this.billService.cancelBill(elem.id).subscribe((data: Object) => {
+      //       console.log('succes', data)
+      //       }, error => this.dialogService.errorOnCancelDialog('Não é possível cancelar essa cobrança'))
+      //     }
+      //   })
   }
   onCreate() {
     this.dialogService.open(FormComponent);
