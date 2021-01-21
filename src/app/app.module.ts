@@ -10,6 +10,9 @@ import { MaterialModule } from './material/material.module'
 import { FormComponent } from './views/form/form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './views/navbar/navbar.component'
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
+
 
 
 @NgModule({
@@ -27,11 +30,16 @@ import { NavbarComponent } from './views/navbar/navbar.component'
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    RouterModule
 
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS ,useClass: AuthInterceptorService ,multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FormComponent]
 })
 export class AppModule { }
+
+

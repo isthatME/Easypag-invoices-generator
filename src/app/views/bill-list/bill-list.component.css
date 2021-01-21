@@ -2,11 +2,30 @@
   display: flex;
   justify-content: center;
   width: 50%;
+  margin-left: 30rem;
+  margin-top: 3rem;
 }
 .table-wrapper-container {
   width: 100%;
 }
+.create-btn {
+  padding: 1rem;
+}
+.create-btn > button {
+  background-color: #5b3f9c !important;
+  color: white;
+}
+.table-footer {
+  display:flex;
+  justify-content: space-between;
+}
+mat-paginator {
+  padding: 0.2rem;
+}
 table {
   width: 100%;
   margin-top: 2rem;
+}
+.timer-icon{
+  color: #f39c12;
 }

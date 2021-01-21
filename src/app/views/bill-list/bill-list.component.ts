@@ -3,6 +3,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-bill-list',
@@ -17,7 +19,10 @@ export class BillListComponent implements AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private billService: BillService) { }
+  constructor(
+    private billService: BillService,
+    private dialog: MatDialog
+    ) { }
   ngAfterViewInit(): void {       
     this.onLoad()
   }
@@ -39,5 +44,8 @@ export class BillListComponent implements AfterViewInit  {
       this.onLoad()
     })
     this.onLoad()
+  }
+  onCreate(){
+    this.dialog.open(FormComponent);
   }
 }

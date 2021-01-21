@@ -2,59 +2,92 @@
 <form [formGroup]="form" class="normal-form">
 
     <div class="form-container">
-        <div class="main-data">
+        <div class="customer-data">
             <div formGroupName="customer">
-                <mat-form-field>
-                    <input formControlName="name" matInput placeholder="Digite seu nome">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="docNumber" matInput placeholder="Digite seu cpf">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="email" matInput placeholder="Digite seu email">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="phoneNumber" matInput placeholder="Digite o telefone">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="maturityDate" matInput placeholder="Escolha uma data">
-                </mat-form-field>
+                <div class="customer-info">
+                    <h3>
+                        Dados pessoais
+                    </h3>
+                    <mat-form-field>
+                        <input formControlName="name" matInput placeholder="Digite seu nome">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="docNumber" matInput placeholder="Digite seu cpf">
+                    </mat-form-field>
+                    <mat-form-field >
+                        <input formControlName="email" matInput placeholder="Digite seu email" email>
+                    </mat-form-field>
+                    <mat-form-field hintLabel="Adicione 55 antes do DDD">
+                        <input formControlName="phoneNumber" matInput placeholder="Digite o telefone">
+                    </mat-form-field>
+                </div>
+
+                <div class="address-info">
+                    <h3>
+                        Dados do Endereço
+                    </h3>
+                    <div formGroupName="address">
+                        <mat-form-field>
+                            <input formControlName="cep" matInput placeholder="Digite o CEP">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input formControlName="city" matInput placeholder="Digite a cidade">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>UF</mat-label>
+                            <mat-select [(value)]="selected">
+                              <mat-option>None</mat-option>
+                              <mat-option value="SP">SP</mat-option>
+                              <mat-option value="CE">CE</mat-option>
+                              <mat-option value="RJ">RJ</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input formControlName="streetNumber" matInput placeholder="Digite o número">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input formControlName="addressLine1" matInput placeholder="Digite seu logradouro">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input formControlName="area" matInput placeholder="Digite o bairro">
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="adress">
-            <div formGroupName="adress">
-                <mat-form-field>
-                    <input formControlName="cep" matInput placeholder="Digite o CEP">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="city" matInput placeholder="Digite a cidade">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="uf" matInput placeholder="Digite o uf">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="streetNumber" matInput placeholder="Digite o número">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="addressLine1" matInput placeholder="Digite seu logradouro">
-                </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="complement" matInput placeholder="Digite so complemento">
-                </mat-form-field>
+        <div class="payment-data">
+            <h3>
+                Detalhes da cobrança
+            </h3>
+            <mat-form-field>
+                <input formControlName="instructionsMsg" matInput placeholder="Instruções do boleto">
+            </mat-form-field>
+            <mat-form-field>
+                <input formControlName="notes" matInput placeholder="Observações do boleto">
+            </mat-form-field>
+            <div formArrayName="items">
+                <div class="items-array" *ngFor="let item of form.controls.items['controls']; let i = index"
+                    [formGroupName]="i">
+                    <mat-form-field>
+                        <input formControlName="description" matInput placeholder="Digite o que está cobrando">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="quantity" matInput placeholder="Digite a quantidade">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="price" matInput placeholder="Digite o preço">
+                    </mat-form-field>
+                </div>
             </div>
-        </div>
-        <div formGroupName="items">
-            <mat-form-field>
-                <input formControlName="description" matInput placeholder="Digite seu nome">
+            <mat-form-field appearance="fill">
+                <mat-label>Escolha a data de vencimento</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dueDate" date>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <mat-form-field>
-                <input formControlName="quantity" matInput placeholder="Digite seu nome">
-            </mat-form-field>
-            <mat-form-field>
-                <input formControlName="price" matInput placeholder="Digite seu nome">
-            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" *ngIf="form.valid">Criar cobrança</button>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" disabled *ngIf="!form.valid" placeholder="teste" class="invalid-btn">Criar cobrança</button>
         </div>
     </div>
-    <button mat-raised-button color="primary" type="submit" (click)="onSubmit(form)">Submit</button>
 
 </form>

@@ -1,12 +1,12 @@
 // export class bill {
-//     dueDate: string,
+//     dueDate: Date;
 //     items: [
 //       {
 //         description: string,
 //         quantity: number,
 //         price: number
 //       }
-//     ],
+//     ];
 //     customer: {
 //       "name": "PESSOA JURÍDICA LTDA",
 //       "email": "pessoajuridica@email.com",
@@ -20,7 +20,7 @@
 //         "addressLine1": "Rua Lourenço Correa",
 //         "streetNumber": "470"
 //       }
-//     },
+//     };
 //     "instructionsMsg": "Teste de Instrução",
 //     "notes": "Teste de Observação"
 //   }

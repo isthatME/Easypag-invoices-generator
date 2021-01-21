@@ -9,7 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -22,7 +25,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatGridListModule,
     MatInputModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatSelectModule
   ], providers: [
     CdkColumnDef,
   ],
@@ -34,7 +41,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatGridListModule,
     MatInputModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }
