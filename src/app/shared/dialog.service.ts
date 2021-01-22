@@ -1,7 +1,8 @@
-import { Injectable, Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CancelErrorComponent } from '../notifications/cancel-error/cancel-error.component';
 import { ConfirmComponent } from '../notifications/confirm/confirm.component';
+import { FormErrorComponent } from '../notifications/form-error/form-error.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DialogService {
     })
   }
   errorOnSubmitForm(msg: string){
-    return this.dialog.open(ConfirmComponent, {
+    return this.dialog.open(FormErrorComponent, {
        position: { top: '10px'},
        data: {
          message: msg
