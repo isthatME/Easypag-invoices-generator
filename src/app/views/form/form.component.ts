@@ -28,27 +28,27 @@ export class FormComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       customer: this.formBuilder.group({
-        name: [null, Validators.required],
-        docNumber: [null, [Validators.required]],
-        email: [null, [Validators.required]],
-        phoneNumber: [null, [Validators.required]],
+        name: ['Giovanne', Validators.required],
+        docNumber: ['46434051800', [Validators.required, Validators.minLength(11)]],
+        email: ['giovanne@gmail.com', [Validators.required]],
+        phoneNumber: ['5585996439955', [Validators.required, Validators.minLength(13)]],
         address: this.formBuilder.group({
-          cep: [null, Validators.required],
-          city: [null, Validators.required],
-          uf: [null, Validators.required],
-          streetNumber: [null, Validators.required],
-          area: [null, Validators.required],
-          addressLine1: [null, Validators.required],
+          cep: ['11920000', [Validators.required, Validators.minLength(8)]],
+          city: ['Santos', [Validators.required]],
+          uf: ['SP', [Validators.required]],
+          streetNumber: ['250', [Validators.required]],
+          area: ['Marapé', [Validators.required]],
+          addressLine1: ['Cumbica', [Validators.required]],
         })
       }),
-      instructionsMsg: [null, Validators.required],
-      notes: [null, Validators.required],
-      dueDate: [null, Validators.required],
+      instructionsMsg: ['Alguma instrução', [Validators.required, Validators.maxLength(100)]],
+      notes: ['Algumas notas..', [Validators.required]],
+      dueDate: ['23/01/2021', [Validators.required]],
       items: this.formBuilder.array([
         this.formBuilder.group({
-          description: [null, Validators.required],
-          quantity: [null, Validators.required],
-          price: [null, Validators.required]
+          description: ['Fatura...', [Validators.required]],
+          quantity: [1, [Validators.required]],
+          price: [550, [Validators.required]]
         })
       ])
     });
@@ -61,16 +61,23 @@ export class FormComponent implements OnInit {
     formObj.items[0].quantity = Number(this.form.value.items[0].quantity)
     formObj.items[0].price = Number(this.form.value.items[0].price)
 
+    this.dialogService.openConfirmDialog(`Deseja criar uma cobrança para ${formObj.customer.name}?`)
+      .afterClosed().subscribe((res: any) => {
+        if (res) {
+          this.billService.chargeCustomer(formObj).subscribe((data: Bill) => {
 
-    this.billService.chargeCustomer(formObj).subscribe((data: Bill) => {
-      console.log('succes', data)
-      this.router.navigate(['/bill'])
-    },
-      error => {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.height = '10rem'
-        this.dialogService.errorOnSubmitForm('Há campos ausentes ou inválidos')
-      }
-    )
+            console.log('succes', data)
+            this.router.navigate(['/bill'])
+          },
+            error => {
+              const dialogConfig = new MatDialogConfig();
+              dialogConfig.height = '10rem'
+              this.dialogService.errorOnSubmitForm('Há campos ausentes ou inválidos')
+            }
+          )
+        }
+      })
+      
+
   }
 }

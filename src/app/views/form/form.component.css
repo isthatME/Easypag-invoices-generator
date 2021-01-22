@@ -7,6 +7,11 @@ button {
     width: 10rem;
     background-color: #5b3f9c !important;
 }
+.btn-submit {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
 .invalid-btn {
     color: white !important;
     background-color: rgb(184, 183, 183) !important;

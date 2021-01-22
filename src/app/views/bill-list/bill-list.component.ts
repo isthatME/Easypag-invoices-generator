@@ -44,15 +44,15 @@ export class BillListComponent implements AfterViewInit {
   }
 
   onCancel(elem) {
-    this.router.navigateByUrl('/bill')
-      // this.dialogService.openConfirmDialog("Tem certeza que deseja cancelar essa cobrança?")
-      // .afterClosed().subscribe((res: any) => {
-      //   if (res) {
-      //     this.billService.cancelBill(elem.id).subscribe((data: Object) => {
-      //       console.log('succes', data)
-      //       }, error => this.dialogService.errorOnCancelDialog('Não é possível cancelar essa cobrança'))
-      //     }
-      //   })
+    this.dialogService.openConfirmDialog("Tem certeza que deseja cancelar essa cobrança?")
+    .afterClosed().subscribe((res: any) => {
+      if (res) {
+        this.billService.cancelBill(elem.id).subscribe((data: Object) => {
+          console.log('succes', data)
+          this.router.navigateByUrl('/bill')
+            }, error => this.dialogService.errorOnCancelDialog('Não é possível cancelar essa cobrança'))
+          }
+        })
   }
   onCreate() {
     this.dialogService.open(FormComponent);
