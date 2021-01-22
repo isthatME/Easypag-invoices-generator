@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
     this.form = this.formBuilder.group({
       customer: this.formBuilder.group({
         name: ['Giovanne', Validators.required],
-        docNumber: ['46434051800', [Validators.required, Validators.minLength(11)]],
+        docNumber: ['46434051808', [Validators.required, Validators.minLength(11)]],
         email: ['giovanne@gmail.com', [Validators.required]],
         phoneNumber: ['5585996439955', [Validators.required, Validators.minLength(13)]],
         address: this.formBuilder.group({
