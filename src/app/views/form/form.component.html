@@ -11,13 +11,13 @@
                         <input formControlName="name" matInput placeholder="Digite seu nome">
                     </mat-form-field>
                     <mat-form-field hintLabel="Somente dígitos">
-                        <input formControlName="docNumber" matInput placeholder="Digite seu cpf">
+                        <input mask="000.000.000-00||00.000.000/0000-00"  formControlName="docNumber" matInput placeholder="Digite seu cpf">
                     </mat-form-field>
                     <mat-form-field>
                         <input formControlName="email" matInput placeholder="Digite seu email" email>
                     </mat-form-field>
                     <mat-form-field hintLabel="Adicione 55 antes do DDD">
-                        <input formControlName="phoneNumber" matInput placeholder="Digite o telefone">
+                        <input matInput mask="+00 (00) 00000-0000" formControlName="phoneNumber" matInput placeholder="Digite o telefone">
                     </mat-form-field>
                 </div>
                 <div class="address-info">
@@ -26,7 +26,7 @@
                     </h3>
                     <div formGroupName="address">
                         <mat-form-field>
-                            <input formControlName="cep" matInput placeholder="Digite o CEP">
+                            <input mask="00000-000" formControlName="cep" matInput placeholder="Digite o CEP">
                         </mat-form-field>
                         <mat-form-field>
                             <input formControlName="city" matInput placeholder="Digite a cidade">

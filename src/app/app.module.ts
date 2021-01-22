@@ -14,8 +14,11 @@ import { RouterModule } from '@angular/router';
 import { FormErrorComponent } from './notifications/form-error/form-error.component';
 import { ConfirmComponent } from './notifications/confirm/confirm.component';
 import { CancelErrorComponent } from './notifications/cancel-error/cancel-error.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
-
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { CancelErrorComponent } from './notifications/cancel-error/cancel-error.
     CancelErrorComponent
   ],
   imports: [
+    NgxMaskModule.forRoot(maskConfig),
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
