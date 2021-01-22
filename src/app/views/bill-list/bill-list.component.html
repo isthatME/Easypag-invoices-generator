@@ -1,6 +1,4 @@
 <app-navbar></app-navbar>
-
-
 <div class="mat-elevation-z5 table-container">
     <div class="table-wrapper-container">
         <table mat-table [dataSource]="dataSource">
@@ -14,31 +12,22 @@
                     </button>
                 </td>
             </ng-container>
-
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Nome </th>
                 <td mat-cell *matCellDef="let element"> {{element.customer.name}} </td>
             </ng-container>
-
-
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef> Valor </th>
-                <!-- <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td> -->
                 <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
             </ng-container>
-
-
             <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef> Emissão </th>
                 <td mat-cell *matCellDef="let element"> {{element.createdAt | date:"dd/MM/yyyy"}} </td>
             </ng-container>
-
             <ng-container matColumnDef="dueDate">
                 <th mat-header-cell *matHeaderCellDef> Vencimento </th>
                 <td mat-cell *matCellDef="let element"> {{element.dueDate | date:"dd/MM/yyyy"}} </td>
-
             </ng-container>
-
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
@@ -50,7 +39,6 @@
                     </button>
                 </td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>

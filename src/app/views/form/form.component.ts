@@ -65,7 +65,6 @@ export class FormComponent implements OnInit {
       .afterClosed().subscribe((res: any) => {
         if (res) {
           this.billService.chargeCustomer(formObj).subscribe((data: Bill) => {
-
             console.log('succes', data)
             this.router.navigate(['/bill'])
           },
